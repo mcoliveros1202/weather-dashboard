@@ -53,13 +53,11 @@ var saveSearch = function (search) {
     searchHistory.appendChild(cityEl);
 }
 
-
-
 // convert city name to coordinates
 var getCoord = function (cityName) {
     saveSearch(cityName);
     // pick API 
-    var apiUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&limit=1&appid=2a7c7bd65f9deac59c01e0be3fce7c26&";
+    var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&limit=1&appid=2a7c7bd65f9deac59c01e0be3fce7c26&";
 
     // request to URL
     fetch(apiUrl).then(function (response) {
