@@ -58,30 +58,31 @@ console.log(location)
             var date = new Date(data.current.dt * 1000);
 
             // display current forecast
-            currentContainer.innerHTML = `<h3 class="card-header">${location.name} ${date.toDateString()} <img 
+            currentContainer.innerHTML = 
+            `<h3 class="card-header">${location.name} ${date.toDateString()} <img 
             src="http://openweathermap.org/img/wn/${data.current.weather[0].icon}.png" alt="${data.current.weather[0].description}"/> </h3>
 
-            <div class="card">
+            <div class="card-current">
             
-            <p>Temperature: ${data.current.temp} &deg;F</p>
-            <p>Wind Speed: ${data.current.wind_speed} mph</p>
-            <p>Humidity: ${data.current.humidity}%</p>
-            <p>UV Index: ${data.current.uvi}</p>
+            <h4>Temperature: <span class="font-weight-normal">${data.current.temp} &deg;F</span></h4>
+            <h4>Wind Speed: <span class="font-weight-normal">${data.current.wind_speed} mph</span></h4>
+            <h4>Humidity: <span class="font-weight-normal">${data.current.humidity}%</span></h4>
+            <h4>UV Index: <span class="font-weight-normal">${data.current.uvi}</span></h4>
+            </div>
             </div>`;
 
             // display 5-day forecast
             fiveDayContainer.innerHTML = data.daily.map((day, index) => {
                 if (index > 0 && index < 6) {
                     var dt = new Date(day.dt * 1000);
-                    return `<div class="card">
+                    return `<div class="card" id="five-day-forecast">
                 <div class="card-body">
                     <p class="card-text">
-                    <h4>${dt.toDateString()}</h4>
-                    <p> <img 
-                    src="http://openweathermap.org/img/wn/${data.current.weather[0].icon}.png" alt="${data.current.weather[0].description}"/> </p>
-                    <p>Temperature: ${day.temp.max}&deg;F</p>
-                    <p>Wind Speed: ${day.wind_speed} mph</p>
-                    <p>Humidity: ${day.humidity}%</p>
+                    <h4>${dt.toDateString()}<img 
+                    src="http://openweathermap.org/img/wn/${data.current.weather[0].icon}.png" alt="${data.current.weather[0].description}"/></h4>
+                    <p class="font-weight-bold">Temperature: <span class="font-weight-normal">${day.temp.max}&deg;F</span></p>
+                    <p class="font-weight-bold">Wind Speed: <span class="font-weight-normal">${day.wind_speed} mph</span></p>
+                    <p class="font-weight-bold">Humidity: <span class="font-weight-normal">${day.humidity}%</span></p>
                 </div>
             </div>`
                 }

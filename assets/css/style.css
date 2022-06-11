@@ -1,0 +1,162 @@
+header {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+    margin-bottom: 50px;
+    background-color: rgba(52, 73, 102, 0.5);
+    height: 100%;
+}
+
+.h1,
+.h2,
+.h3,
+h1,
+h2,
+h3 {
+    margin-bottom: 10px;
+    margin-top: 0;
+}
+
+.h1 {
+    border-bottom: solid 3px #0d1821;
+}
+.card-search {
+    border: 2px solid #0d1821;
+    border-radius: 7px;
+}
+.search-title {
+    display: flex;
+    background-color: #344966;
+    border-radius: 7px 0 0;
+    color: #f0f4ef;
+    padding: 10px;
+    justify-content: center;
+}
+
+#city-form {
+padding: 15px;
+}
+
+.btn {
+background-color: #344966;
+color: #f0f4ef;
+margin-left: 5px;
+}
+
+.btn:hover {
+    background-color: rgba(52, 73, 102, 0.3);
+    color: #0d1821;
+}
+
+#previous-search {
+    border: 2px solid #0d1821;
+    margin: 35px;
+    border-radius: 7px;
+}
+.previous-title {
+    background-color: #344966;
+    color: #f0f4ef;
+    padding: 12px;
+    border-radius: 7px 7px 0 0;
+}
+
+.cities {
+    padding: 15px 10px;
+    font-size: 18px;
+    display: flex;
+    flex-direction: column;
+}
+
+.col-12,
+.col-sm-9 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.col-12
+.col-sm-9
+p {
+    font-size: 30px;
+}
+
+#today-container {
+    border: 2px solid #0d1821;
+    border-radius: 7px;
+    justify-content: center;
+    width: 95%;
+}
+
+.card-header {
+    display: flex;
+    justify-content: center;
+    background-color: #344966;
+    color: #f0f4ef;
+    margin: 0;
+    padding: 5px 0 0 0;
+    border-radius: 7px 0 0;
+    align-items: center;
+}
+
+.card {
+    margin-left: 25px;
+}
+
+.card-current {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+p {
+    font-weight: 600;
+    font-size: 400;
+}
+
+.forecast-card {
+    display: flex;
+    border: 1px solid #0d1821;
+    flex-direction: column;
+    margin: 45px;
+    border-radius: 7px;
+}
+
+.card-title {
+    background-color: #344966;
+    color: #f0f4ef;
+    align-items: center;
+    display: flex;
+    padding: 10px;
+    justify-content: center;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+}
+
+#five-day {
+    display: flex;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+#five-day-forecast {
+    border: 1px solid #0d1821;
+    width: 30%;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    margin: 0 15px 15px;
+    border-radius: 7px;
+}
+
+.card-text h4 {
+    font-size: 200;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.card-text p {
+font-size: 150;
+}
