@@ -1,7 +1,7 @@
 var searchButton = document.querySelector(".btn");
 var cityInputEl = document.querySelector(".form-input");
 var formEl = document.querySelector("#city-form");
-var searchHistory = [];
+
 // // card variables
 
 var currentContainer = document.getElementById("today-container");
@@ -23,16 +23,41 @@ var formSubmitHandler = function (event) {
     }
 }
 
-// var previousSearch = function() {
-//     var listItemEl = document.createElement("li");
-//     listItemEl.className = "city-item";
-//     listItemEl.setAttribute("data-city-id", cityIdCounter);
-// };
+// save to localStorage
+var saveSearch = function (search) {
+    var search = search.toLowerCase()
+    var searchHistory = [];
+    var savedSearches = JSON.parse(localStorage.getItem('city-search'));
+    if (savedSearches) {
+        searchHistory.push(...savedSearches)
+    }
+
+    if (searchHistory.includes(search)) {
+        return;
+    }
+
+    searchHistory.push(search);
+    localStorage.setItem('city-search', JSON.stringify(searchHistory));
+
+    var searchHistory = document.getElementById("searchHistory");
+    var cityEl = document.createElement("div");
+
+    cityEl.setAttribute("class", "cities");
+    cityEl.textContent = search;
+    // searchHistory.appendChild(cityEl);
+
+
+    cityEl.addEventListener("click", function (event) {
+        getCoord(event.target.innerText);
+    });
+    searchHistory.appendChild(cityEl);
+}
+
+
 
 // convert city name to coordinates
-
 var getCoord = function (cityName) {
-
+    saveSearch(cityName);
     // pick API 
     var apiUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&limit=1&appid=2a7c7bd65f9deac59c01e0be3fce7c26&";
 
@@ -46,7 +71,7 @@ var getCoord = function (cityName) {
 
 var convertCoord = function (location) {
     // create variables for lat and lon to plug into coordApiURL
-console.log(location)
+    console.log(location)
     var lat = location.coord.lat;
     var lon = location.coord.lon;
 
@@ -58,8 +83,8 @@ console.log(location)
             var date = new Date(data.current.dt * 1000);
 
             // display current forecast
-            currentContainer.innerHTML = 
-            `<h3 class="card-header">${location.name} ${date.toDateString()} <img 
+            currentContainer.innerHTML =
+                `<h3 class="card-header">${location.name} ${date.toDateString()} <img 
             src="http://openweathermap.org/img/wn/${data.current.weather[0].icon}.png" alt="${data.current.weather[0].description}"/> </h3>
 
             <div class="card-current">
@@ -88,21 +113,15 @@ console.log(location)
                 }
             }).join('');
 
-            searchHistory = coordApiURL
-            saveSearch();
+
         });
-        // save to localStorage
-        var saveSearch = function (search) {
-            coordApiURL.push(search)
-            localStorage.setItem('city-search', JSON.stringify(coordApiURL));
-             
-        }
 
     });
-    
+
 };
+
 var displayHistory = function () {
-    var savedSearches = localStorage.getItem('city-search');
+    var savedSearches = JSON.parse(localStorage.getItem('city-search'));
 
     // if no searches, set search history to an empty array and return out of function
     if (!savedSearches) {
@@ -110,15 +129,28 @@ var displayHistory = function () {
     }
     console.log("Saved searches found!");
     // else load saved searches
-
-    // parse into array of object
-    savedSearches = JSON.parse(savedSearches);
+    var searchHistory = document.getElementById("searchHistory");
 
     // loop through savedSearches array
     for (var i = 0; i < savedSearches.length; i++) {
-        convertCoord(savedSearches[i]);
+        var cityEl = document.createElement("div");
+        console.log(cityEl);
+        cityEl.setAttribute("class", "cities");
+        cityEl.textContent = savedSearches[i];
+        searchHistory.appendChild(cityEl);
+
+    }
+    var cityList = document.getElementsByClassName("cities")
+    if (cityList.length > 0) {
+        for (let index = 0; index < cityList.length; index++) {
+            const cityEl = cityList[index];
+            cityEl.addEventListener("click", function (event) {
+                getCoord(event.target.innerText);
+            });
+        }
     }
 };
+
 
 
 formEl.addEventListener("submit", formSubmitHandler);
